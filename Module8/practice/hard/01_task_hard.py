@@ -5,3 +5,26 @@
 # а значениями кол-во банкнот. Если пользователь запросил некорректную сумму,
 # нужно вывести дружественное сообщение об ошибке.
 # Результат работы программы - текстовый отчет о номиналах и количестве купюр.
+
+while True:
+    try:
+        summa = int(input("Введите сумму для снятия кратную 500 руб : "))
+        if summa % 500 == 0:
+            break
+        else:
+            print("К сожалению банкомат не может выдать запрошенную вами суммую. Попробуйте ввести еще раз")
+    except ValueError:
+        print("Вы не ввели сумму. Попробуйте еще раз")
+summa_copy=summa
+bill_list = (5000, 2000, 1000, 500,)
+bill_dict = {}
+while summa > 0:
+    for bill in bill_list:
+        numb = summa // bill
+        if numb > 0:
+            bill_dict[bill] = numb
+            summa -= numb * bill
+print(f"Сумма {summa_copy} будет выдана следующими купюрами :")
+print("| Номинал | Количество купюр |")
+for key, value in bill_dict.items():
+    print(f"| {key:^8}|{value:^17} |")
