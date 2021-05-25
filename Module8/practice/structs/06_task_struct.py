@@ -8,3 +8,33 @@
 # 4. Профессия
 # 5. Зарплата
 # Примечание: Данные сгенерированных сотрудников могут повторяться
+from random import choice, randint
+
+# with open("names.txt", "r", encoding="utf-8") as f:
+#     names_list = [line.strip() for line in f]
+# with open("prof.txt", "r", encoding="utf-8") as f:
+#     prof_list = [line.strip() for line in f]
+# print(prof_list)
+names_list = ['Александр', 'Дмитрий', 'Максим', 'Сергей', 'Андрей', 'Алексей', 'Артём', 'Илья', 'Кирилл', 'Михаил',
+              'Никита', 'Матвей', 'Роман', 'Егор', 'Арсений', 'Иван', 'Денис', 'Евгений', 'Тимофей', 'Владислав',
+              'Игорь', 'Владимир', 'Павел', 'Руслан', 'Марк', 'Константин', 'Тимур', 'Олег', 'Ярослав', 'Антон',
+              'Николай', 'Данил']
+prof_list = ['Аудитор', 'Актуарий', 'Аналитик', 'Банкир', 'Брокер', 'Бухгалтер', 'Дилер', 'Продавец', 'Инкассатор',
+             'Коммерческий директор', 'Кредитный консультант', 'Маркетолог', 'Маклер биржевой',
+             'Менеджер по работе с клиентами', 'Налоговый инспектор', 'Операционист', 'Предприниматель', 'Сметчик',
+             'Снабженец', 'Страховой агент', 'Релайтер', 'Товаровед', 'Торговый представитель', 'Тренд-вотчер',
+             'Трейдер', 'Экономист', 'Экспедитор', 'Финансист', 'Кассир']
+vowels = ["а", "е", "и", "о", "у", "ы", "э", "ю", "я"]
+sur_names_list = []
+for name in names_list:
+    if name[-1] in vowels:
+        sur_names_list.append(name[:-1] + "ин")
+    elif name[-1] in ("й", "ь"):
+        sur_names_list.append(name[:-1] + "ев")
+    else:
+        sur_names_list.append(name + "ов")
+staff_list = []
+staff_list=[{"surname": choice(sur_names_list), "name": choice(names_list), "age":randint(22,65),
+             "profession": choice(prof_list), "salary": randint(30,300)*1000} for _ in range(100)]
+staff_list.sort(key=lambda x: (x["surname"], x["name"]))
+for el in staff_list: print(el)
